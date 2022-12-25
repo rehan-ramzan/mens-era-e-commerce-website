@@ -1,0 +1,193 @@
+<section>
+  <div class="header">
+    <div class="container">
+      <div class="row">
+        <div class="col-2 header-content">
+          <div>
+          <h1>Men's Era</h1>
+          <hr style="width:30%; margin:0.25rem auto; height:5px;
+          background: #fff; border:none; border-radius:10px; ">
+          <p>Enjoy new year sales, with 50% off.</p>
+          <a href="/product" class="border-btn">Explore Now &#8594;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--------------------------------------- Featured Products --------------------------->
+
+  <div class="small-container">
+    <% if(user?.role==='admin'){ %>
+        <div class="add-product-wrapper">
+          <i class="fa-solid fa-circle-plus"></i>
+          <h2>Add Product</h2>
+        </div>
+      <div class="new-product-form" >
+        <div class="close-bar">
+          <h2>Product</h2>
+          <i class="fa-solid fa-xmark close-icon"></i>
+        </div>
+        <form method="POST" enctype="multipart/form-data" id="add-new-product-form">
+        <div>
+          <div>
+          <div>
+            <input type="text" name="name" placeholder="Product Name">
+          </div>
+          <div>
+              <input type="number" name="price" placeholder="Product Price">
+          </div>
+          <div>
+            <input type="number" name="off" placeholder="Percentage Off">
+          </div>
+          <div>
+              <textarea name="description" id="details" cols="30" rows="5"
+              placeholder="Product Description" required></textarea>
+          </div>
+          <span>Available Size:</span>
+          <div style="display: flex; text-align: center;">
+            <div>
+              <input type="checkbox" id="small" name="size" value="Small">
+              <label for="small">Small</label>
+            </div>
+            <div>
+              <input type="checkbox" id="medium" name="size" value="Medium">
+              <label for="medium">Medium</label>
+            </div>
+            <div>
+              <input type="checkbox" id="large" name="size" value="Large">
+              <label for="large">Large</label>
+            </div>
+            <div>
+              <input type="checkbox" id="xlarge" name="size" value="xlarge">
+              <label for="xlarge">xlarge</label>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div>
+            <input type="file" id="file" name="image" accept="image/png, image/jpeg" multiple>
+            <label for="file" class="label">
+                <i class="fas fa-upload"></i> &nbsp; Choose Product Photos
+            </label>
+            <div id="images"></div>
+          </div>
+        </div>
+      </div>
+        <div>
+          <span id="add-error" style="color:red" ></span>
+        </div>
+        <div>
+          <button type="submit" class="add-product form-btn">Add Product</button>
+        </div>
+      </form>
+    </div>
+
+    <% } %>
+  </div>
+
+  <div>
+    <div class="main">
+      <div class="overlay">
+          <div class="title" id="end-date">50% Off</div>
+          <div class="countdown-cols">
+              <div>
+                  <input type="text" readonly value="0">
+                  <br/>
+                  <label for="">Days</label>
+              </div>
+              <div>
+                  <input type="text" readonly value="0">
+                  <br/>
+                  <label for="">Hours</label>
+              </div>
+              <div>
+                  <input type="text" readonly value="0">
+                  <br/>
+                  <label for="">Minutes</label>
+              </div>
+              <div>
+                  <input type="text" readonly value="0">
+                  <br/>
+                  <label for="">Seconds</label>
+              </div>
+          </div>
+      </div>
+  </div>
+  </div>
+
+  <section class="featured-products-section">
+    <div class="container">
+    <div class="grid-box navbar">
+      <% latestProducts.forEach( product=>{ %>
+        <div class="product-wrapper">
+            <a class="pdetail" href="/product/details/<%= product._id %>">
+              <img src="/assests/products/<%= product.image[0] %>">
+            </a>
+            <h4><%= product.name %></h4>
+            <div class="cart-div">
+                <p>$<%= product.price %></p>
+              <i data-product="<%= JSON.stringify(product)%>" class="fa-solid fa-plus add-to-cart"></i>
+            </div>
+            <% if(user?.role === 'admin'){ %>
+            <div class="btns-wrapper">
+              <i class="icon fa-solid fa-rotate update" data-productId="<%=JSON.stringify({Id:product._id}) %>"></i>
+              <i class="icon fa-solid fa-trash delete" data-productId="<%=JSON.stringify({Id:product._id}) %>"></i>
+            </div>
+            <% } %>
+        </div>
+      <% }) %>
+    </div>
+    </div>
+  </section>  
+
+  <!--------------------------------Update Product ----------------------------------------->
+  <div class="update-product-form">
+    <div class="close-bar">
+      <h2>Product</h2>
+      <i class="fa-solid fa-xmark update-close-icon"></i>
+    </div>
+    <form id="update-form" enctype="multipart/form-data" method="POST">
+          <div>
+            <input type="text" name="name" placeholder="Product Name">
+          </div>
+          <div>
+            <input type="number" name="price" placeholder="Product Price">
+          </div>
+          <div>
+            <input type="number" name="off" placeholder="Percentage Off">
+          </div>
+          <div>
+            <textarea name="description" id="details" cols="30" rows="5"
+            placeholder="Product Description"></textarea>
+          </div>
+          <div>
+            <span id="update-error" style="color:red" ></span>
+          </div>
+          <div>
+            <button type="submit" class="form-btn" >Update Product</button>
+          </div>
+    </form>
+  </div>
+  <!-------------------------------------- Products offers ------------------------------->
+  <div class="offer">
+    <div class="small-container">
+      <div class="row">
+        <div class="col-2">
+          <img src="/assests/exclusive.png" class="offer-img">
+        </div>
+        <div class="col-2">
+          <h1>Smart Band 4</h1>
+          <div style="display:flex;align-items:center; margin: 1rem 0;">
+            <h2 style="font-size: 2rem;">$200</h2>
+            <p style="margin-left: 1rem; font-size: 1.4rem;">50% Off</p>
+          </div>
+          <small>The Mi Smart Band 4 fearures a 39.9% larger (than Mi Band 3)
+            AMOLED color full-touch display with adjustable brightness,so
+            everything is clear as canbe.<br>
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

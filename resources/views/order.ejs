@@ -1,0 +1,49 @@
+<section style="margin: 2.5rem 0;">
+    <% if(orders.length){ %>
+        <div class="container">
+        <h2 style="padding:0 2%;font-weight:500">Order Summary</h2>
+        <div class="order" style="overflow-x: auto;">
+            <table>
+                <tr>
+                    <th>Email</th>
+                    <th>Phone*</th>
+                    <th>Address</th>
+                    <th>Products</th>
+                    <th>Total Price</th>
+                    <th>Payment</th>
+                    <th>Action</th>
+                </tr>
+                <% orders.forEach((order)=>{ %>
+                <tr>
+                    <td><%= order.email %></td>
+                    <td><%= order.phone %></td>
+                    <td><%= order.address %></td>
+                    <td>
+                        <div class="dropdown">
+                          <button class="dropbtn">Orders</button>
+                          <div class="dropdown-content">
+                            <% for (let {item,qty} of (Object.values(order.items.items))){ %>
+                                <a>
+                                    <span><%= item.name %></span>
+                                    <span><%= qty %>Pcs</span>
+                                </a>
+                            <% } %>
+                          </div>
+                        </div>
+                    </td>
+                    <td>$<%= order.items.totalPrice %></td>
+                    
+                    <td><%= order.paymentStatus? 'Card':'Cash' %></td>
+                    <td><i class="delete-order icon fa-solid fa-trash"
+                      data-orderid="<%= JSON.stringify(order._id) %>" ></i></td>
+                </tr>
+                <% }) %>
+            </table>
+        </div>
+    </div>
+    <% }else{ %>
+    <div  style="margin:2.5rem 0; text-align: center;">
+        <img src="/assests/out-of-stock.png" alt="No Orders">
+    </div>
+    <% } %>
+</section>

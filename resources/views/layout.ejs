@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Men's Era</title>
+    
+    <!-- link to the google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- link to the css style sheet -->
+    <link rel="stylesheet" href="/css/app.css">
+
+    <!-- link to the font aweasome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- swipper slider cdn -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js" defer></script>
+
+    <!-- link to the javascript file -->
+    <script src="/js/app.js" defer></script>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js" defer></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js" defer></script>
+
+    <!-- link to the axios library -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
+
+
+</head>
+
+<body>
+    <header>
+        <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <a href="/"><img src="/assests/logo.png" alt="logo" width="150px"
+                style="object-fit: cover;"></a>
+            </div>
+            <nav>
+                <ul id="MenuItems">
+                    <li><a href="/product">Product</a></li>
+                    <% if(user?.role==='admin'){ %>
+                    <li><a href="/order">Order</a></li>
+                    <% } %>
+                    <li><a href="/contact">Contact</a></li>
+                    <% if(user) { %>
+                        <li>
+                            <a href="/account">
+                                Account
+                            </a>
+                        </li>
+                    <% } else { %>
+                        <li><a href="/login">Login</a></li>
+                        <li><a href="/register">Signup</a></li>
+                    <% } %>
+                </ul>
+            </nav>
+            <a href="/cart" class="cart">
+                <span class="cart-counter"><%= session.cart? session.cart.totalQty: 0 %></span>
+                <i class="fa-solid fa-cart-shopping" style="margin-left:3px;"></i>
+            </a>
+            <img src="/assests/menu.png" class="menu-icon" onclick="menutoggle()">
+            </div>
+        </div>
+    </header>
+
+
+    <%- body %>
+    
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android and ios mobile phone.</p>
+                    <div class="app-logo">
+                        <img src="/assests/play-store.png">
+                        <img src="/assests/app-store.png">
+                    </div>
+                </div>
+                <div class="footer-col-2">
+                    <img src="/assests/logo.png">
+                    <p>Our Purpose Is To Sustainably Make the Pleasure and Benefits of Sports Accessible to the Many.
+                    </p>
+                </div>
+                <div class="footer-col-3">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>Blog Post</li>
+                        <li>Return Policy</li>
+                        <li>Join Affiliate</li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3>Follow Us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                        <li>Youtube</li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">Copyright 2022 - Men's Era </p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

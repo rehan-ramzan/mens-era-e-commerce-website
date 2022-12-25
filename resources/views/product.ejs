@@ -1,0 +1,51 @@
+<section> 
+    <div class="container" style="margin: 3rem auto;">
+      <div class="grid-box navbar">
+        <% products.forEach( product=>{ %>
+          <div class="product-wrapper">
+            <a href="/product/details/<%= product._id %>" id="pdetail" >
+              <img src="/assests/products/<%= product.image[0] %>">
+            </a>
+            <h4><%= product.name %></h4>
+            <div class="cart-div">
+              <p>$<%= product.price %></p>
+              <i data-product="<%= JSON.stringify(product)%>" class="fa-solid fa-plus add-to-cart"></i>
+            </div>
+            <% if(user?.role==='admin'){ %>
+              <div class="btns-wrapper">
+                <i class="icon fa-solid fa-rotate update" data-productId="<%=JSON.stringify({Id:product._id}) %>"></i>
+              <i class="icon fa-solid fa-trash delete" data-productId="<%=JSON.stringify({Id:product._id}) %>"></i>
+              </div>
+            <% } %>
+          </div>
+        <% }) %>
+      </div>
+      <div class="update-product-form">
+        <div class="close-bar">
+          <h2>Product</h2>
+          <i class="fa-solid fa-xmark update-close-icon"></i>
+        </div>
+        <form id="update-form" enctype="multipart/form-data" method="POST">
+          <div>
+            <input type="text" name="name" placeholder="Product Name">
+          </div>
+          <div>
+            <input type="number" name="price" placeholder="Product Price">
+          </div>
+          <div>
+            <input type="number" name="off" placeholder="Percentage Off">
+          </div>
+          <div>
+            <textarea name="description" id="details" cols="30" rows="5"
+            placeholder="Product Description"></textarea>
+          </div>
+          <div>
+            <span id="update-error" style="color:red" ></span>
+          </div>
+          <div>
+            <button type="submit" class="form-btn" >Update Product</button>
+          </div>
+        </form>
+      </div>
+    </div>
+</section>

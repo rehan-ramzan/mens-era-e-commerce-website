@@ -1,0 +1,70 @@
+  <!-- Cart items details -->
+<section style="margin: 2.5rem 0;">
+  <div class="container cart-page">
+    <% if(session.cart){ %>
+    <h2 style="padding:0 2%;font-weight:500">Cart Summary</h2>
+    <div class="order" style="overflow-x: auto;">
+    <table>
+        <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Actions</th>
+        </tr>
+        <% for(let {item, qty} of (Object.values(session.cart.items)) ){ %>
+        <tr>
+            <td>
+                <div class="cart-info">
+                    <img src="/assests/Products/<%= item.image[0] %>">
+                    <h3 class="cart-headers"><%= item.name %></h3>
+                </div>
+            </td>
+            <td><h3 class="cart-headers"><%= qty %> Pcs</h3></td>
+            <td><h3 class="cart-headers">$<%= item.price*qty %></h3></td>
+            <td><i style="font-size:24px;color:red;cursor: pointer;" data-pid="<%= JSON.stringify(item._id) %>"  class="fa-solid fa-circle-xmark remove-order"></i></td>
+        </tr>
+        <% } %>
+      </table>
+    </div>
+    <div class="order">
+    <div class="total-price">
+        <div class="amount-wrapper">
+            <span>Total Amount : </span>
+            <span>$<%= session.cart.totalPrice %></span>
+        </div>
+    <form id="payment-form" method="POST">
+        <div>
+            <label for="payment-method">Select Payment method:</label>
+            <select  id="payment-method" name="pay_method">
+                <option value="Cash">Cash on delivery</option>
+                <option value="Card">Pay with card</option>
+            </select>
+        </div>
+        <div>
+            <label for="address">Address</label>
+            <input type="text" placeholder="Address" name="address" required id="address">
+        </div>
+        <div>
+            <label for="phone">Enter a phone number:</label><br>
+            <input type="tel" id="phone" name="phone" placeholder="XXXXXXXXXXX" 
+            pattern="[0-9]{11}" required><br>
+            <small>Format: 03XXXXXXXXXX</small><br>
+        </div>
+        <div>
+            <span id="order-error" style="color: red;"></span>
+        </div>
+        <% if(user){%>
+            <button class="btn order-btn" style="border: none;" type="submit">Checkout</button>
+        <% } else{ %>
+            <a href="/login" class="btn">Login</a>
+        <% } %>
+    </form>
+    </div>
+    <% } else{ %>
+        <div style="text-align: center;">
+            <img src="/assests/empty-cart.png" style="max-width:400px;" alt="Empty-Cart">
+        </div>
+    <% } %>
+    </div>
+</div>
+</section>

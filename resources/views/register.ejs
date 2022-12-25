@@ -1,0 +1,53 @@
+<section class="account">
+<div class="auth-wrapper">
+    <div class="title-login login">
+        Register Now
+    </div>
+    <div class="form-container-account">
+             <div class="links">
+                <div class="facebook">
+                   <i class="fab fa-facebook-square"></i>
+                   <span>Facebook</span>
+                </div>
+                <div class="google">
+                   <i class="fab fa-google-plus-square"></i>
+                   <span>Google</span>
+                </div>
+             </div>
+        <div class="form-inner">
+            <form action="/register" method="POST" class="signup">
+               <div class="field">
+                 <input type="text" placeholder="Email Address" name="email" value="<%= messages.email %>" required>
+               </div>
+               <% if(messages.email_error){ %>
+                <div class="error-field">
+                    <span><%= messages.email_error %></span>  
+                </div>
+              <% } %>
+               <div class="field">
+                 <input type="password" placeholder="Password" name="password" required>
+               </div>
+               <% if(messages.password_error){ %>
+                <div class="error-field">
+                    <span><%= messages.password_error %></span>  
+                </div>
+              <% } %>
+               <div class="field">
+                 <input type="password" placeholder="Confirm password" name="confirm_password" required>
+               </div>
+               <% if(messages.confirm_password_error){ %>
+                <div class="error-field">
+                    <span><%= messages.confirm_password_error %></span>  
+                </div>
+              <% } %>
+               <div class="field">
+                    <button type="submit" class="btn">Sign up</button>
+               </div>
+               <div class="signup-link">
+                    Already have an account? <a href="/login">Login</a>
+             </div>
+            </form>
+        </div>
+    </div>
+</div>
+</section>

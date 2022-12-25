@@ -1,0 +1,40 @@
+<section style="margin: 2.5rem 0;">
+    <div class="container">
+        <div class="profile">
+            <div>
+                <img src="/assests/profile.png" alt="Profile">
+                <h3 style="margin: 1rem 0;font-size: 1.4rem;"><%= user.name %></h3>
+                <form action="/logout" id="logout">
+                    <a href="#" style="font-size: 20px;"  onclick="document.getElementById('logout').submit()"
+                    >Logout</a>
+                </form>
+            </div>
+            <div>
+                <div class="info-wrapper">
+                    <img src="/assests/file.png" alt="info">
+                    <h3>General Information</h3>
+                </div>
+                <form action="" id="update-profile-form" enctype="multipart/form-data">
+                    <div class="input-box">
+                        <input style="color: #777;" type="email" value="<%= user.email %>" id="email" readonly placeholder="Email">
+                    </div>
+                    <div class="input-box">
+                        <input type="password" name="password" required
+                        placeholder="Password">
+                    </div>
+                    <div class="input-box">
+                        <input type="password" name="confirmPassword"  required placeholder="Confirm Password">
+                    </div>
+                    <div>
+                        <span id="profile-error" style="color: red;">
+                        <%= messages.error %></span>
+                    </div>
+                    <div class="button">
+                        <input id="update-profile-btn" type="submit" value="update" 
+                        data-userid="<%= JSON.stringify(user._id) %>" >
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>

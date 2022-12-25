@@ -1,0 +1,56 @@
+<section>
+    <div class="small-container single-product">
+        <div class="row">
+            <div class="col-2">
+                <img src='/assests/Products/<%= product.image[0] %>' id="product-img">    
+                <div class="small-img-row">
+                    <% for(let img of product.image){ %>
+                    <div class="small-img-col">
+                        <img src="/assests/Products/<%= img %>" width="100%" height="130px" class="small-img">
+                    </div>
+                    <% } %>
+                </div>
+            </div>
+            <div class="col-2">
+                <h1><%= product.name %></h1>
+                <div>
+                    <h4>$<%= product.price %></h4>
+                    <% if(product.off!=0){ %>
+                        <h4><%= product.off %>%Off</h4>
+                    <% } %>
+                </div>
+                
+                <button data-product="<%= JSON.stringify(product)%>" class="add-to-cart btn" style="margin:1rem 0">Add to Cart</button>
+                <h3>Product Details <i class="fa fa-indent"></i></h3>
+                <br>
+                <p><%= product.description %></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- title -->
+    <% if(relatedProducts.length){ %>
+    <div class="small-container">
+        <div class="row row-2">
+            <h2>Related Products</h2>
+        </div>
+    </div>
+    <!-- Products -->
+    <div class="small-container">
+        <div class="grid-box">
+            <% relatedProducts.forEach( product=>{ %>
+            <div class="product-wrapper" style="margin-bottom: 2.4rem;">
+                <a href="/product/details/<%= product._id %>">
+                    <img src="/assests/Products/<%= product.image[0] %>">
+                </a>
+                <h4 style="font-size: 1.2rem;text-align: center;margin:10px 0;"><%= product.name  %></h4>
+                <div class="cart-div">
+                    <p>$<%= product.price %></p>
+                    <button data-product="<%= JSON.stringify(product)%>" class="cart-btn add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+    </div>
+    <% } %>
+</section>

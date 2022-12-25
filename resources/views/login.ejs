@@ -1,0 +1,41 @@
+<section class="account">
+   <div class="auth-wrapper">
+      <div class="title-login login">
+         Login
+      </div>
+      <div class="form-container-account">
+         <div class="links">
+            <div class="facebook">
+               <i class="fab fa-facebook-square"></i>
+               <span>Facebook</span>
+            </div>
+            <div class="google">
+               <i class="fab fa-google-plus-square"></i>
+               <span>Google</span>
+            </div>
+         </div>
+      <div class="form-inner">
+      <form action="/login" method="POST" class="login">
+         <div class="field">
+            <input type="text" placeholder="Email Address" name="email" required>
+         </div>
+         <div class="field">
+            <input type="password" placeholder="Password" name="password" required>
+         </div>
+         <% if(messages.error){ %>
+            <div class="error-field">
+              <span><%= messages.error %></span>
+            </div> 
+         <% } %>
+         <div class="pass-link">
+            <a href="/forget-password">Forgot password?</a>
+         </div>
+         <div class="field">
+            <button class="btn" type="submit">Login</button>
+         </div>
+         <div class="signup-link">
+            Not a member? <a href="/register">Signup now</a>
+         </div>
+      </form>
+   </div>
+</section>
